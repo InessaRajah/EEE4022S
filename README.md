@@ -10,3 +10,4 @@ The Smart_Contact\testing.py script contains the unit tests used to validate the
 
 The contents of the Integrated_System folder is the code required to simulate the integrated P2P energy trading and smart contract system.
 The files contained in the Integrated_System\Testing folder are the unit tests written to validate the operation of the integrated system.
+The code in Integrated_System\receipt.js is the code used to decode the blockchain transaction input.
