@@ -10,6 +10,8 @@ import pandas as pd
 import functions as func
 from pathlib import Path
 
+#Written by: Inessa Rajah
+
 ##THIS SCRIPT AIMS TO INTEGRATE OPTIMISATION CODE WITH SMART CONTRACT
 
 #list description of all agents
@@ -65,45 +67,6 @@ row5 = data_file[data_file.Time == '2016/02/01']
 load5 = row5['Proper kWh'].to_list()
 loads.append(load5)
 
-# data_path = Path('JulyProfiles6.csv')
-# data_file = pd.read_csv(data_path)
-# data_file = pd.DataFrame(data_file)
-# data_file = data_file.drop(columns = ['Electricity.Timestep', 'Sum', '[kWh]'])
-# row2 = data_file[data_file.Time == '2016/07/04']
-# load2 = row2['Proper kWh'].to_list()
-# loads.append(load2)
-
-# data_path = Path('JulyProfiles7.csv')
-# data_file = pd.read_csv(data_path)
-# data_file = pd.DataFrame(data_file)
-# data_file = data_file.drop(columns = ['Electricity.Timestep', 'Sum', '[kWh]'])
-# row3 = data_file[data_file.Time == '2016/07/04']
-# load3 = row3['Proper kWh'].to_list()
-# loads.append(load3)
-
-# data_path = Path('JulyProfiles8.csv')
-# data_file = pd.read_csv(data_path)
-# data_file = pd.DataFrame(data_file)
-# data_file = data_file.drop(columns = ['Electricity.Timestep', 'Sum', '[kWh]'])
-# row4 = data_file[data_file.Time == '2016/07/04']
-# load4 = row4['Proper kWh'].to_list()
-# loads.append(load4)
-
-# data_path = Path('JulyProfiles9.csv')
-# data_file = pd.read_csv(data_path)
-# data_file = pd.DataFrame(data_file)
-# data_file = data_file.drop(columns = ['Electricity.Timestep', 'Sum', '[kWh]'])
-# row5 = data_file[data_file.Time == '2016/07/04']
-# load5 = row5['Proper kWh'].to_list()
-# loads.append(load5)
-
-
-#list of each agents solar panel number
-#solar_panels = [7, 7, 5, 1, 4]
-#solar_panels = [7, 7, 1, 5, 4]
-#solar_panels = [10, 10, 0, 10, 0]
-
-#solar_panels = [5, 5, 0, 5, 0, 7, 5, 8, 0]
 solar_panels = [5, 5, 0, 5, 0]
 
 
@@ -190,7 +153,8 @@ print('Peers deregistered')
 
 
 #starting SOC_bat for all agents
-#SOC_bat = 0.7*3.7*np.ones([num_agents, 1])
+#SOC_bat = 0.7*2*np.ones([num_agents, 1])
+
 for t in range(20,21):
 
             # web3.eth.defaultAccount = web3.eth.accounts[i+1]
@@ -313,16 +277,8 @@ for t in range(20,21):
                 print('peer sending local residual', contract.functions.peers(str(web3.eth.accounts[i+1])).call())
             tx_hash = contract.functions.addLocalRes(primal_res, dual_res).transact()
             web3.eth.waitForTransactionReceipt(tx_hash)
-            #print('Local residuals added by agent:', i +1)
-            #print(contract.functions.localres(str(web3.eth.accounts[i+1])).call())
-            #print('Here is the state of the global pres:', contract.functions.global_pres().call())
-            #print('Here is the state of the global dres:', contract.functions.global_dres().call())
         test_prim = sum(round(players[i].Res_primal * 10000) for i in range(num_agents))
         test_dual = sum(round(players[i].Res_dual * 10000) for i in range(num_agents))
-        # print('From Prosumer class global prim:', test_prim)
-        # print('From Prosumer class dual prim', test_dual)
-        # print(contract.functions.global_pres().call())
-        # print(contract.functions.global_dres().call())
         row = Residuals_DF.shape[0]
         Residuals_DF.loc[row, 'Iteration']  = iteration  
         Residuals_DF.loc[row, 'Global Prim'] = contract.functions.global_pres().call()
@@ -353,11 +309,7 @@ for t in range(20,21):
                     web3.eth.waitForTransactionReceipt(tx_hash)
                     tradeID = (i+1)*10 + p[j].tolist() + 1
                     trade_bids = contract.functions.trade_bids_mapping(tradeID).call()
-                    #print("Trade bid", i+1, "to", p[j]+1 ,"submitted.  Take a look!")
-                    #print(trade_bids)
-                    #print("Total number of trade bids:")
-                    #print(contract.functions.tradeCountIter().call())
-                #print("All trade bids submitted")
+
                 #now, each agent needs to collect all trade bids and repeat the process
             num_tradebids = contract.functions.tradeCountIter().call()
             for i in range(num_agents):
