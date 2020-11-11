@@ -98,13 +98,6 @@ for i in range(num_agents):
 
 print('Peers deregistered')
 
-# web3.eth.defaultAccount = web3.eth.accounts[1]
-# tx_hash = contract.functions.deregisterPeer().transact()
-# web3.eth.waitForTransactionReceipt(tx_hash)
-# print(contract.functions.peers(str(web3.eth.accounts[0])).call()[4])
-# print(contract.functions.peers(str(web3.eth.accounts[1])).call()[4])
-# print(contract.functions.peers(str(web3.eth.accounts[2])).call()[4])
-# print(contract.functions.peers(str(web3.eth.accounts[3])).call()[4])
 
 web3.eth.defaultAccount = web3.eth.accounts[0]
 tx_hash = contract.functions.startTradingPer(date, time).transact()
