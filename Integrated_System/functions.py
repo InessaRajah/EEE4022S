@@ -4,6 +4,8 @@ from Prosumer import Prosumer
 import numpy as np
 import pandas as pd
 
+#Written by: Inessa Rajah
+
 #functions created to be used in other scripts
 ##CONSTANT VARIABLES
 #area of one of the seven solar panels being used in m^2
