@@ -1,5 +1,5 @@
 pragma solidity ^0.5.16;
-
+//Written by: Inessa Rajah
 contract Energy {
     //public state variables are accessible by everyone who invokes contract on the network 
     //this contract assumes that every member of the blockchain is a member of the microgrid i.e. is able to participate in trades
