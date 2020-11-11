@@ -2,6 +2,7 @@ import gurobipy as gb
 import numpy as np
 
 #Class taken from code created by Baroche et. al in the following paper : https://ieeexplore.ieee.org/document/8810474
+#This Class can be found at the following link: https://gitlab.com/fmoret/P2PApp/-/wikis/home
 
 #class which can have objects set
 class expando(object):

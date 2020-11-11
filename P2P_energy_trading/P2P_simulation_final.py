@@ -7,6 +7,7 @@ import pandas as pd
 from pathlib import Path
 import csv
 
+#Written by: Inessa Rajah
 
 #list description of all agents
 agents = []
